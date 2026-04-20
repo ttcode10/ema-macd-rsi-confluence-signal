@@ -11,6 +11,7 @@ rsiLen      = input.int(14,  "RSI Length",      minval=1)
 rsiEmaLen   = input.int(14,  "RSI EMA Length",  minval=1)
 rsiLevel    = input.float(50, "RSI Level",      minval=1, maxval=99,
      tooltip="RSI and RSI-EMA must be above/below this level")
+showOnlyToday = input.bool(false, "Only Show Today's Session")
 
 // ── Calculations ─────────────────────────────────────────────────────────────
 emaFast = ta.ema(close, emaFastLen)
@@ -94,10 +95,16 @@ ribbonColor =
   bearScore > bullScore ? color.new(color.red,  bearTrans) :
   color.new(color.gray, 92)
 
+// ── Today's session filter ──────────────────────────────────────────────────
+var int currentDay = na
+if barstate.islast
+    currentDay := dayofmonth
+bool isToday = showOnlyToday ? (dayofmonth == currentDay) : true
+
 // ── Plot EMAs + ribbon fill ───────────────────────────────────────────────────
 p1 = plot(emaFast, "EMA 9",  color=color.new(color.aqua,   0), linewidth=1)
 p2 = plot(emaSlow, "EMA 20", color=color.new(color.orange,  0), linewidth=1)
-fill(p1, p2, color=ribbonColor, title="Confluence Ribbon")
+fill(p1, p2, color=isToday ? ribbonColor : na, title="Confluence Ribbon")
 
 // ── Signal labels ─────────────────────────────────────────────────────────────
 if buySignal
