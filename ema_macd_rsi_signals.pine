@@ -107,12 +107,12 @@ p2 = plot(emaSlow, "EMA 20", color=color.new(color.orange,  0), linewidth=1)
 fill(p1, p2, color=isToday ? ribbonColor : na, title="Confluence Ribbon")
 
 // ── Signal labels ─────────────────────────────────────────────────────────────
-if buySignal
+if buySignal and barstate.isconfirmed
     label.new(bar_index, low,  "BUY",  yloc=yloc.belowbar,
      color=color.new(color.lime, 10), textcolor=color.black,
      style=label.style_label_up,  size=size.normal)
 
-if sellSignal
+if sellSignal and barstate.isconfirmed
     label.new(bar_index, high, "SELL", yloc=yloc.abovebar,
      color=color.new(color.red,  10), textcolor=color.white,
      style=label.style_label_down, size=size.normal)
