@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>贪吃蛇 Snake</title>
+<meta name="description" content="经典贪吃蛇网页小游戏，支持键盘与触屏操作" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-wrap">
+    <header class="topbar">
+      <h1>🐍 贪吃蛇</h1>
+      <div class="scores">
+        <div class="score-box">
+          <span class="label">分数</span>
+          <span id="score">0</span>
+        </div>
+        <div class="score-box">
+          <span class="label">最高分</span>
+          <span id="high-score">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="board-container">
+      <canvas id="board" width="400" height="400"></canvas>
+
+      <div id="overlay" class="overlay">
+        <div class="overlay-content">
+          <h2 id="overlay-title">贪吃蛇</h2>
+          <p id="overlay-msg">按方向键 / WASD 开始游戏<br class="mobile-hide"/>手机端可滑动屏幕控制</p>
+          <button id="start-btn">开始游戏</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-hint">
+      <p>桌面端：方向键 / WASD 移动，空格暂停</p>
+      <p class="mobile-only">手机端：在棋盘上滑动方向，或使用下方按钮</p>
+    </div>
+
+    <div class="dpad" id="dpad">
+      <button class="dpad-btn up" data-dir="up" aria-label="上">▲</button>
+      <button class="dpad-btn left" data-dir="left" aria-label="左">◀</button>
+      <button class="dpad-btn right" data-dir="right" aria-label="右">▶</button>
+      <button class="dpad-btn down" data-dir="down" aria-label="下">▼</button>
+    </div>
+
+    <div class="bottom-actions">
+      <button id="pause-btn" class="secondary-btn">暂停</button>
+      <button id="restart-btn" class="secondary-btn">重新开始</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span>用 ← ↑ → ↓ 或 WASD 控制，吃到食物得分，撞墙或咬到自己就结束</span>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
